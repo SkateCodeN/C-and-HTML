@@ -1,0 +1,34 @@
+<html>
+<head>
+<body>
+<p>Monday,22,April,2019,15:48:32:05102</p>
+<p>VCDS Version: Release 18.9.1 (x64) Running on Windows 7 x64</p>
+<p>www.Ross-Tech.com</p>
+<p></p>
+<p>                Address 01: Engine       Labels: 06B-909-518-AMB.lbl</p>
+<p>Control Module Part Number: 8E0 909 518 AK    HW: 8E0 909 018 A</p>
+<p>  Component and/or Version: 1.8L R4/5VT     G02 0004</p>
+<p>           Software Coding: 0016751</p>
+<p>            Work Shop Code: WSC 63351 000 00000</p>
+<p>                      VCID: 79F9C54E33CABC829A-5142</p>
+<p>4 Faults Found:</p>
+<p></p>
+<p>16885 - Vehicle Speed Sensor </p>
+<p>            P0501 - 004 - Implausible Signal - Intermittent</p>
+<p>16618 - Boost Pressure Regulation </p>
+<p>            P0234 - 001 - Limit Exceeded (Overboost Condition) - Intermittent</p>
+<p>18010 - Power Supply Terminal 30 </p>
+<p>            P1602 - 002 - Voltage too Low - Intermittent</p>
+<p>16487 - Mass Air Flow Sensor (G70) </p>
+<p>            P0103 - 001 - Signal too High - Intermittent</p>
+<p></p>
+<p>Readiness: 0010 1001</p>
+<p></p>
+<p>// Left csr overnight thats why there is a battery problem.</p>
+<p>//Can be said the same for MAF, car was started w no maf on. </p>
+<p></p>
+<p></p>
+<p></p>
+</body>
+</head>
+</html>
