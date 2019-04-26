@@ -1,0 +1,15 @@
+// THis is the simple template of HTML that my class Website will read from.
+
+<!DOCTYPE html>
+<html>
+<style> <!-- Ditto for the style--> </style>
+<head>
+<title> Example </title>
+<body>
+
+	
+<!--This is where the content goes-->
+
+</body>
+</head>
+</html>
