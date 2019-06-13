@@ -1,0 +1,59 @@
+Following the UPDATE TO THIS REPO file I made earlier, I detailed how I 
+wanted the webpage to look like after C# read the text file and 
+converted it to a style of webpage that I wanted.
+Here is that code of HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Same as FileName</title>
+</head>
+<body class="container">
+<!-- Start your code here -->
+  
+    <p class="lw"> Date: Wednesday,01,May,2019,17:20:20:05102!</p>
+  
+      <div class="ecu-info">
+        <p>Address 01: Engine       Labels: 06B-909-518-AMB.lbl</p> 
+        <p>Control Module Part Number: 8E0 909 518 AK    HW: 8E0 909 018 A</p>
+        <p>Component and/or Version: 1.8L R4/5VT     G02 0004</p>
+        <!-- Please note that the ecu-info array contains 6 lines of info with the VCDS id
+             being the last one. But I will keep that info from displaying. -->
+        <br/>
+        <br/>
+        <br/>
+////////////////////////////////READ COMMENTS BELOW For this section, es mucho importante/////////////////////////////////////////
+        <div class="dtc-info">
+           <p>1 Fault Found:</p>
+            <p>16683 - Boost Pressure Regulation </p>
+            <p>P0299 - 002 - Control Range Not Reached - Intermittent - MIL ON</p>
+            <p>Readiness: 0010 1001</p>
+          
+        </div>
+        
+        <br/>
+        <br/>
+///////////////////////////////DITTO for this section as well /////////////////////////////////////////////////////////////////////
+  <div class="comments">
+     <p>A comment can be multi line</p>
+      <p> So expect one line comment to n </p>
+      <p>number of comments</p>
+  </div>
+  </div>
+  <!-- End your code here -->
+</body>
+</html>
+/////////////////////////////////COMMENTS! ////////////////////////////////////////////////////////////////////////////////////////
+*Things to note. The dtc-info class as well as the comments class are not static.
+Ie the file could contain multiple lines of DTC's that the program (VCDS) wrote to the file. SO the array could be size of n.
+Detailing what i see lets break it down:
+
+1 Fault Found:                                                                // In C# this is line 0
+            16683 - Boost Pressure Regulation                                 //After we have inof on the DTC
+            P0299 - 002 - Control Range Not Reached - Intermittent - MIL ON   //So a DTC is 2 lines (1 is info on DTC, 2 is detail)
+            Readiness: 0010 1001                                              //Readiness marks the end of the DTC, dont really need it
+            
+The same could be said for the comments section of this.. 
+Comments can be of array length 1, to n. but mainly my concern and reason for writing this
+is that in my algorithm I will have to make sure that I read and keep all the dtc's of size n in one array and to write it 
+to the new html file with the <p></p> element wrapped around it. 
