@@ -1,0 +1,36 @@
+Alright here is the CSS code that will make my webpage of DTC a lil more to the style of Guillermo.
+Resources:
+The color pallet called Beach Towels and it can be found here: 
+https://digitalsynopsis.com/design/beautiful-color-palettes-combinations-schemes/
+
+
+.container {
+  background: black;
+  text-align: center;
+  height: 100px;
+  
+  
+}
+.lw { 
+  text-align: center;
+  font-size: 30px;
+  color:  #fed766;
+}
+.ecu-info{
+  color: #2ab7ca;
+  background:  #f4f4f8;
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+.dtc-info{
+  color:#fe4a49;
+  text-align: left;
+}
+.comments{
+  text-align: left;
+  color: #009900;
+}
+
+Simple and to the point, this will be updated later as more and more ideas are coming to my head. 
+Also I want to research how to stylize, or better understanding of margin paddin and borders to make this pop a little more. 
