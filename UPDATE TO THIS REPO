@@ -1,0 +1,40 @@
+1. I will change the name to a sort of C# DTC WebPage writer or something. 
+2. I will try to be more detailed in my form of documentation, the motto I want to adhere by is Quality not Quantity.
+3. So here are some of the ideas I have. 
+
+I have a folder where all my DTC's are and I want a C# program to have them on a list and create a webpage out of said file.
+The style and layout of the website will be already set in a writeable file that the C# program will see. 
+
+
+Here is what I have:
+The DTC file will have a structured Name:
+Silver Bullet A4   12-1-18
+name of car   model  Date
+
+Inside the File we see this:
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Date of file and time DTC was logged           Wednesday,01,May,2019,17:20:20:05102
+//VCDS info and PC info                VCDS Version: Release 18.9.1 (x64) Running on Windows 7 x64
+//Website                                                www.Ross-Tech.com
+//space //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ECU Info:                                   Address 01: Engine       Labels: 06B-909-518-AMB.lbl
+//                                      Control Module Part Number: 8E0 909 518 AK    HW: 8E0 909 018 A
+//                                              Component and/or Version: 1.8L R4/5VT     G02 0004
+//                                                         Software Coding: 0016751
+//                                                        Work Shop Code: WSC 63351 000 00000
+//No Space ////////////////////////////////////////////VCID: 79F9C54E33CABC829A-5124///////////////////////////////////////////////////////
+// DTC:info 1 Fault Found:
+
+    16683 - Boost Pressure Regulation 
+            P0299 - 002 - Control Range Not Reached - Intermittent - MIL ON
+
+Readiness: 0010 1001
+
+//Sometimes I will have comments here before end of file 
+// <--This dictates its a comment on each file that I have.
+
+What I want is time and date which is the first Line. 
+I also want all the ECU info but for it to be seperate from DTC info and Comments. 
+Yes, all will be placed in same webpage but I have hunch that I can keep a DTC array later for quicker inspection. Same goes with comments
+I want them formatted seperately by CSS so they look like comments. ie green as Im used to. DTC is in red. Next I will write the 
+HTML and CSS mockup code as to how I want it to look like using this file for reference. 
