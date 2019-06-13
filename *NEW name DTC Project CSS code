@@ -1,0 +1,51 @@
+I decided to keep this file and the html file seperate for the sake of readability.
+This centers the information at the middle of the page 
+has a border for dtc info in red at top and bottom
+plus color pallet is still Beach Towels
+
+.container {
+  background: black;
+  text-align: center;
+  height: 100px;
+  }
+.page-title{
+  color: silver;
+  font-weight: bold;
+}
+.date { 
+  text-align: center;
+  font-size: 30px;
+  color:  #fed766;
+}
+.ecu-info{
+  color: #2ab7ca;
+  background:  #f4f4f8;
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+.dtc-info{
+  color:#fe4a49;
+  text-align: left;
+  margin-left: 10px;
+  width: 890px;
+  border-top: 1px solid #fe4a49;
+  border-bottom: 1px solid #fe4a49;
+  
+}
+
+.dtc-info p{
+  margin-left: 15px;
+}
+
+.comments{
+  text-align: left;
+  color: #009900;
+  background:  #e6e6ea;
+  margin-left: 10px;
+  width: 890px;
+  
+}
+.comments p{
+  margin-left: 15px;
+}
