@@ -1,0 +1,42 @@
+Will upload the file that is barebones whithout the comments.
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+</style>
+
+<title>Same as FileName</title>
+</head>
+<body class="container">
+
+       <!-- This is the date the file was created according to whats written in the file. -->
+    <p class="date"> 
+    </p>
+
+  <div class="ecu-info">
+	<!--This will be the name of the folder specifying name or nickname (year make model)
+	    Example of one that I used on the original template: The Silver Bullet (2004 Audi A4) -->
+        <h1 class="page-title">
+	</h1>
+
+        <!-- Please note that the info array contains 6 lines of info with the VCDS id
+             being the last one. But I will keep that info from displaying. -->
+     <div class="dtc-info">
+
+         <h2 class="dtc-title"> DTC Codes:</h2>
+     </div> <!-- End of <div class"dtc-info"> -->
+        	
+  		<div class="comments">
+    		 <h2 class="comment-title">Comments:</h2>
+		  <!-- This is variable and depending on the original file, since this is a template
+		  then what I want here for C# is to wrap the lines it reads from the original file and 
+		  wrap them in the <p></> HTML element. --> 
+                  <!-- Example of a comment or string wrapped in the element
+		        <p>A comment can be multi line</p> -->
+
+                </div> <!--End of </div class="comments" -->
+  	</div>         <! End of <div class="info"> this is the parent element of 
+</body>                <!-- End of </body class="container"> -->
+</html>
