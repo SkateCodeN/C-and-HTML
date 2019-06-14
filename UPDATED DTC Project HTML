@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Same as FileName</title>
+</head>
+<body class="container">
+<!-- Start your code here -->
+  <div class="date-border">
+    <p class="date" id="day"> Day: Wednesday</p>
+        <p class="date" id="date1"> Date: 01 May 2019</p>
+        <p class="date" id="time">Time: 17:20</p>
+    </div>
+      <div class="info">
+        <div class="ecu-info">
+        <h1 class="page-title">The Silver Bullet (2004 Audi A4) </h1>
+        <p>Address 01: Engine       Labels: 06B-909-518-AMB.lbl</p> 
+        <p>Control Module Part Number: 8E0 909 518 AK    HW: 8E0 909 018 A</p>
+        <p>Component and/or Version: 1.8L R4/5VT     G02 0004</p>
+        <!-- Please note that the ecu-info array contains 6 lines of info with the VCDS id
+             being the last one. But I will keep that info from displaying. -->
+        </div>
+        <div class="dtc-info">
+          <h2 class="dtc-title"> DTC Codes:</h2>
+           <p>1 Fault Found:</p>
+            <p>16683 - Boost Pressure Regulation </p>
+            <p>P0299 - 002 - Control Range Not Reached - Intermittent - MIL ON</p>
+            <p>Readiness: 0010 1001</p>
+          
+        </div>
+        
+  <div class="comments">
+    <h2 class="comment-title">Comments:</h2>
+     <p>A comment can be multi line</p>
+      <p> So expect one line comment to n </p>
+      <p>number of comments</p>
+  </div>
+  </div>
+  <!-- End your code here -->
+</body>
+</html>
