@@ -1,0 +1,74 @@
+.container {
+  background: black;
+  text-align: center;
+  height: 100px;
+  }
+.date-border{
+  text-align: center;
+}
+.page-title{
+  color: silver;
+  font-weight: bold;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+.date-border{
+  
+  margin-bottom: -15px;
+  
+}
+.date { 
+  font-size: 20px;
+  color:  #fed766;
+ 
+ display: inline-block;
+}
+#day{
+  margin-right: 2%;
+}
+
+#time{
+  margin-left: 2%;
+}
+.info{
+  color: #2ab7ca;
+  background:  #f4f4f8;
+  width: 550px;
+  text-align: center;
+  display: inline-block;
+}
+.ecu-info p{
+  
+}
+.dtc-info{
+  color:#fe4a49;
+  text-align: left;
+  margin-left: 10px;
+  width: 530px;
+  border-top: 1px solid #fe4a49;
+  border-bottom: 1px solid #fe4a49;
+  
+}
+.dtc-title{
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+.dtc-info p{
+  margin-left: 15px;
+}
+
+.comments{
+  text-align: left;
+  color: #009900;
+  background:  #e6e6ea;
+  margin-left: 10px;
+  width: 530px;
+  
+}
+
+.comments-title{
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+.comments p{
+  margin-left: 15px;
+}
+
