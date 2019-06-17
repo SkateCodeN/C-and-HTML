@@ -1,0 +1,69 @@
+using System;
+using System.IO;
+
+namespace Create_DTC_Webpage_From_File
+{
+    class WP
+    {
+        string DTC_Write_Path = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\DTC WP\";
+
+        string DTC_HTML_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files\Barebones HTML Layout v2.txt";
+        //D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files
+        //C:\Users\JIMMY\Desktop\Test
+        string DTC_CSS_Style = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\CSS Files\CSS style v2.txt";
+        string title;
+        string day;
+        string date;
+        string time;
+        string fileName;
+
+        StreamWriter sw;
+        StreamReader sr;
+
+        public WP(string file, string title, string day, string date, string time)
+        {
+            // Read the DTC HTML Template 
+            sr = new StreamReader(DTC_HTML_Template);
+            this.title = title;
+            this.date = date;
+            this.time = time;
+            this.day = day;
+            fileName = file;
+
+            sw = new StreamWriter(DTC_Write_Path + "test" + ".txt");
+
+            // Lets read all of the HTML line content
+            //sw.Write(sr.ReadToEnd());
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                sw.WriteLine(line);
+
+                if (line == "<style>")
+                {
+                    // Read al lthe lines of the CSS style file
+                   StreamReader css = new StreamReader(DTC_CSS_Style);
+                    //string css = sr.ReadToEnd();
+
+                    // Now write it to the file 
+                    sw.WriteLine(css.ReadToEnd());
+                    css.Close();
+                    //line = "</style>";
+                    continue;
+                }
+                
+
+
+            }
+            sw.Close();
+            sr.Close();
+
+            }
+
+       
+
+
+    }
+
+    
+}
