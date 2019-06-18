@@ -1,0 +1,112 @@
+I have been working on the C# class to take all of the txt files (DTC files) from a directory and to write 
+the CSS and HTML with the contents of the DTC file. I am struggling with reading and replacing specific spots of the DTC file 
+as the txt file contains tabs. This will be worked on the next couple of days. 
+
+HEre is the WP class 
+class WP
+    {
+        string DTC_Write_Path = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\DTC WP\";
+
+        string DTC_HTML_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files\Barebones HTML Layout v2.txt";
+        //D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files
+        //C:\Users\JIMMY\Desktop\Test
+        string DTC_CSS_Style = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\CSS Files\CSS style v2.txt";
+        string title;
+        
+        string fileName;
+        public string[] theDate = new string[4];
+
+        StreamWriter sw;
+        StreamReader sr;
+
+        public WP(string file, string title)
+        {
+            // Read the DTC HTML Template 
+            sr = new StreamReader(DTC_HTML_Template);
+            this.title = title;
+            
+            fileName = file;
+
+            sw = new StreamWriter(DTC_Write_Path + "test" + ".txt");
+            writeDate(file);
+            write_DTC_WebPage();
+            // Lets read all of the HTML line content
+            //sw.Write(sr.ReadToEnd());
+            
+            
+
+            }
+
+       public void writeDate ( string filePath)
+        {
+            string temp = "";
+            StreamReader readDate = new StreamReader(filePath);
+            
+            temp = readDate.ReadLine();
+            theDate = temp.Split(',');
+
+            
+        }
+
+       public void write_DTC_WebPage()
+        {
+            while (!sr.EndOfStream)
+            {
+
+                string line = sr.ReadLine();
+                
+                switch (line)
+                {
+                    // Write the day
+                    case "<p class=\"date\" id=\"day\">":
+                        sw.WriteLine("<p class=\"date\" id=\"day\">");
+                        sw.WriteLine(theDate[0]);
+                        break;
+                    // Write the CSS Style
+                    case "<style>":
+                        StreamReader css = new StreamReader(DTC_CSS_Style);
+                        // Now write it to the file 
+                        sw.WriteLine("<style>");
+                        sw.WriteLine(css.ReadToEnd());
+                        css.Close();
+                        break;
+
+                    // Write the time 
+                    case "<p class=\"date\" id=\"time\">":
+                        sw.WriteLine("<p class=\"date\" id=\"time\">");
+                        sw.WriteLine(theDate[4]);
+
+                        break;
+
+                    case "<p class=\"date\" id=\"date1\">":
+                        sw.WriteLine("<p class=\"date\" id=\"date1\">");
+                        sw.WriteLine(theDate[1] + "-" + theDate[2] + "-" + theDate[3]);
+                        break;
+                    default:
+                        
+                        sw.WriteLine(line);
+                        break;
+                }
+
+
+            }
+            sw.Close();
+            sr.Close();
+
+        }
+
+       public string readDTCFile(string filePath)
+        {
+            string test = "nope";
+            sr = new StreamReader(filePath);
+            // Read the contents of dtc
+            string startingPoing = "VCID: 79F9C54E33CABC829A-5124";
+            // Read all lines and split with "\t" out 
+            string[] DTC_file = sr.ReadToEnd().Split('\t');
+            test = DTC_file[9];
+           
+            return test;
+        }
+    }
+
+   
