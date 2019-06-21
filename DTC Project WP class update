@@ -1,0 +1,160 @@
+// There is a struggle towards the end in my switch statement. Mainly when I write in the DTC codes from a file
+the code deletes or will not output the rest of the Template HTML file. So I am currently working on resolving this. 
+FOr the sake of making things clear, mainly for future me, I might make 3 different classes. and of course making better comments. 
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace Create_DTC_Webpage_From_File
+{
+    class WP
+    {
+        string DTC_Write_Path = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\DTC WP\";
+
+        string DTC_HTML_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files\Barebones HTML Layout v2.txt";
+        //D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files
+        //C:\Users\JIMMY\Desktop\Test
+        string DTC_CSS_Style = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\CSS Files\CSS style v2.txt";
+        string title;
+        
+        string fileName;
+        public string[] theDate = new string[4];
+        public List<string> dtc_codes;
+        public List<string> dtc_Comments;
+
+        StreamWriter sw;
+        StreamReader sr;
+
+        public WP(string file, string title)
+        {
+            // Read the DTC HTML Template 
+            sr = new StreamReader(DTC_HTML_Template);
+            this.title = title;
+            
+            fileName = file;
+
+            sw = new StreamWriter(DTC_Write_Path + "test" + ".txt");
+            writeDate(file);
+            write_DTC_WebPage();
+            // Lets read all of the HTML line content
+            //sw.Write(sr.ReadToEnd());
+            
+            
+
+            }
+
+       public void writeDate ( string filePath)
+        {
+            string temp = "";
+            StreamReader readDate = new StreamReader(filePath);
+            
+            temp = readDate.ReadLine();
+            theDate = temp.Split(',');
+
+            
+        }
+
+       public void write_DTC_WebPage()
+        {
+            while (!sr.EndOfStream)
+            {
+
+                string line = sr.ReadLine();
+                
+                switch (line)
+                {
+                    // Write the day
+                    case "<p class=\"date\" id=\"day\">":
+                        sw.WriteLine("<p class=\"date\" id=\"day\">");
+                        sw.WriteLine(theDate[0]);
+                        break;
+                    // Write the CSS Style
+                    case "<style>":
+                        StreamReader css = new StreamReader(DTC_CSS_Style);
+                        // Now write it to the file 
+                        sw.WriteLine("<style>");
+                        sw.WriteLine(css.ReadToEnd());
+                        css.Close();
+                        break;
+
+                    // Write the time hour:minute:second
+                    case "<p class=\"date\" id=\"time\">":
+                        sw.WriteLine("<p class=\"date\" id=\"time\">");
+                        sw.WriteLine(theDate[4]);
+
+                        break;
+                    // Write the date in format day-Month-year
+                    case "<p class=\"date\" id=\"date1\">":
+                        sw.WriteLine("<p class=\"date\" id=\"date1\">");
+                        sw.WriteLine(theDate[1] + "-" + theDate[2] + "-" + theDate[3]);
+                        break;
+
+                    // Lets write the DTC codes and format them in the <p> </p> element.
+                    case "<h2 class=\"dtc-title\"> DTC Codes:</h2>":
+                        readDTCFile(fileName);
+                        sw.WriteLine("<h2 class=\"dtc-title\"> DTC Codes:</h2>");
+                        for (int a = 0; a < dtc_codes.Count - 1; a++)
+                        {
+                            sw.WriteLine("<p>" + dtc_codes[a] + "</p>");
+                        }
+                        break;
+
+
+
+                    default:
+                        
+                        sw.WriteLine(line);
+                        break;
+                }
+
+
+            }
+            sw.Close();
+            sr.Close();
+
+        }
+
+       public void readDTCFile(string filePath)
+        {
+            dtc_codes = new List<string>();
+            dtc_Comments = new List<string>();
+
+            int comments_Index = 0;
+           // string test = "";
+            sr = new StreamReader(filePath);
+            // Read the contents of dtc
+            //string startingPoing = "VCID: 79F9C54E33CABC829A-5124";
+            // Read all lines and split with "\t" out 
+           string[] DTC_file = sr.ReadToEnd().Split('\n');
+           
+            // Because the program VCDS is consistant with writing the header
+            // We know that the VCID is in position 9. So we start to read DTC codes at 10
+            for (int i=10; i<DTC_file.Length; i++)
+            {
+                // We add our dtc codes to the global list called dtc_codes
+                // But if we see a line or in this case an array position that starts with "//"
+                // We break the code and adding to the DTC list because we know that comments are coming
+                dtc_codes.Add(DTC_file[i]);
+
+                if (DTC_file[i].StartsWith("//"))
+                {
+                    // Lets return i so we know when the commments start
+                    comments_Index = i;
+                    break;
+                }
+            }
+
+            // Now we know the index that the comments start and obviously we know the end
+            // of the file/ array that is DTC file 
+            for ( int a = comments_Index; a < DTC_file.Length; a++)
+            {
+                dtc_Comments.Add(DTC_file[a]);
+            }
+           
+            
+        }
+    }
+
+    
+}
