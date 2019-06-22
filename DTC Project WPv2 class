@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+namespace Create_DTC_Webpage_From_File
+{
+    class WPv2
+    {
+
+/// //////////////////////////////////////////////////////////////////////Globals //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //HTML Template location in txt form
+        string HTML_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files\Barebones HTML Layout v2.txt";
+        //CSS Template txt location
+        string CSS_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\CSS Files\CSS style v2.txt";
+        //Our write location. This is where the final product will reside.
+        string WP_Location = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\DTC WP\";
+
+        //This will be the global variable for the WPv2 class to use as it will be the file passed by the constructor. This is the path for template
+       //reader and writer to get date, comments and DTC codes
+        string FilePath;
+        // Now for the title/filename of the file. 
+        string fileName { get { return Path.GetFileName(FilePath); } }
+
+        StreamReader templateReader;
+        StreamWriter templateWriter;
+
+        // List that will read the DTC Codes off the filePath given
+        List<string> DTC_Codes;
+        List<string> Comments;
+        // The date will be read from the first line in the document via the writeDate method. 
+        // ex of a date 04 May 2019 10:20:2000
+        string[] document_Date = new string[4];
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////Methods////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Reads the first line of the document path provided as the argument to this method. 
+        // I split the string line that is read by its commas as thats how it is formatted in the VCDS document
+        // Example of input from document :
+        //                                 Monday,04,March,2019,15:58:20:05102 
+        // After this method is called, document_Date array contains the following:
+        //                              document_Date[0] = Monday
+        //                              document_Date[1] = 04
+        //                              document_Date[2] = March
+        //                              document_Date[3] = 2019
+        //                              document_Date[4] = 15:58:20:05102
+        void writeDate(string document)
+        {
+            string temp = "";
+            StreamReader readDate = new StreamReader(document);
+            temp = readDate.ReadLine();
+            document_Date = temp.Split(',');
+            readDate.Close();
+
+
+        }
+
+        
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    } // end class
+}// end namespace
