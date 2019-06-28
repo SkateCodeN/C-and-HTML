@@ -1,0 +1,190 @@
+// Given that our DTC files are correctly formatted, ie they have Comments on them, then the code behaves wonderfully. 
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace Create_DTC_Webpage_From_File
+{
+    class WP
+    {
+        ///////////////////////////////////////////////////// GLOBALS  /////////////////////////////////////////////////////////////////////////////
+        //Where we will write our DTC file to 
+        string DTC_Write_Path = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\DTC WP\";
+        // Location of our HTML template
+        string DTC_HTML_Template = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\HTML Barebones Files\Barebones HTML Layout v2.txt";
+        // Location of the CSS Style 
+        string DTC_CSS_Style = @"D:\Hobbies\PROGRAMMING\Programming\C#\Project DTC Codes\CSS Files\CSS style v2.txt";
+        // Global that contains the page title
+        string pageTitle;
+        
+        public string[] theDate = new string[4];
+        public List<string> dtc_codes = new List<string>();
+        public List<string> dtc_Comments = new List<string>();
+
+        StreamWriter sw;
+        StreamReader sr;
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////// CONSTRUCTOR  ////////////////////////////////////////////////////////////////////
+
+        // This is the constructor, it takes in the argument of file 
+        // file = the path of the file we wish to make (this is the path of the DTC file)
+        public WP(string file)
+        {
+            // By using the method GetFileName we capture it in our global page title string.
+            pageTitle = Path.GetFileName(file);
+            // Run the method to get the date from the file and populate our global string array.
+            writeDate(file);
+            // read the DTC codes and place it to our list, this loads the comments as well.
+            readDTCFile(file);
+            // Now that we have all the info...lets write it in the document.
+            write_DTC_WebPage();
+
+        }
+        /// <summary>
+        /// Gets the date and splits it by its commas(,) and saves it to a global string array
+        /// </summary>
+        /// <param name="filePath"></param>
+        // Reads the first line of the document path provided as the argument to this method. 
+        // I split the string line that is read by its commas as thats how it is formatted in the VCDS document
+        // Example of input from document :
+        //                                 Monday,04,March,2019,15:58:20:05102 
+        // After this method is called, document_Date array contains the following:
+        //                              document_Date[0] = Monday
+        //                              document_Date[1] = 04
+        //                              document_Date[2] = March
+        //                              document_Date[3] = 2019
+        //                              document_Date[4] = 15:58:20:05102
+        void writeDate (string filePath)
+        {
+            // Create a temp string that will contain the first line of the document, which is the date.
+            StreamReader readDate = new StreamReader(filePath);
+            // The first line is the date, so read it, split it into substrings seperated by the comma
+            // Into the array
+            // I will test this as it will reduce my lines of code from 5 to 3.
+            theDate = readDate.ReadLine().Split(',');
+            readDate.Close();
+
+            
+        }
+
+        // This is a method that contains a switch statement that is reading line by line of the 
+        //  HTML template and will stop to write in the date, the Style , comments and dtc codes. 
+        /// <summary>
+        /// Will read the document line by line and input date, css style, dtc codes, comments and title provided by the dtc doc. 
+        /// </summary>
+       public void write_DTC_WebPage()
+        {
+            sr = new StreamReader(DTC_HTML_Template);
+            sw = new StreamWriter(DTC_Write_Path + Path.GetFileName(pageTitle) + ".html");
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                switch (line)
+                {
+                    // Write the day
+                    case "<p class=\"date\" id=\"day\">":
+                        sw.WriteLine("<p class=\"date\" id=\"day\">");
+                        sw.WriteLine(theDate[0]);
+                        break;
+                    // Write the CSS Style
+                    case "<style>":
+                        StreamReader css = new StreamReader(DTC_CSS_Style);
+                        sw.WriteLine("<style>");
+                        sw.WriteLine(css.ReadToEnd());
+                        css.Close();
+                        break;
+
+                    // Write the time hour:minute:second:millisecond
+                    case "<p class=\"date\" id=\"time\">":
+                        sw.WriteLine("<p class=\"date\" id=\"time\">");
+                        sw.WriteLine(theDate[4]);
+                        break;
+                    // Write the date in format day-Month-year
+                    case "<p class=\"date\" id=\"date1\">":
+                        sw.WriteLine("<p class=\"date\" id=\"date1\">");
+                        sw.WriteLine(theDate[1] + "-" + theDate[2] + "-" + theDate[3]);
+                        break;
+
+                    // Lets write the DTC codes and format them in the <p> </p> element.
+                    case "<h2 class=\"dtc-title\"> DTC Codes:</h2>":
+
+                        sw.WriteLine("<h2 class=\"dtc-title\"> DTC Codes:</h2>");
+                        for (int a =0; a< dtc_codes.Count -1; a++)
+                        {
+                            sw.WriteLine("<p>" + dtc_codes[a] + "</p>");
+                        }
+                        break;
+
+                    // Lets write the comments of the dtc file
+                    case "<h2 class=\"comment-title\">Comments:</h2>":
+                        sw.WriteLine("<h2 class=\"comment-title\">Comments:</h2>");
+                       foreach (string s in dtc_Comments)
+                        {
+                            sw.WriteLine("<p>" + s + "</p>");
+                        }
+
+                        break;
+                    // Write the title
+                    case "<title>":
+                        sw.WriteLine("<title>");
+                        sw.WriteLine(Path.GetFileName(pageTitle));
+                        break;
+                    default:
+                        
+                        sw.WriteLine(line);
+                        break;
+                }
+
+
+            }
+            sw.Close();
+            sr.Close();
+
+        }
+
+        // This reads the sectin of the file that contains the DTC codes and the comments, this method also 
+        // Deals with seperating the dtc codes and comments. 
+       public void readDTCFile(string filePath)
+        {
+            int comments_Index = 0;
+           
+            sr = new StreamReader(filePath);
+            // Read the contents of dtc
+            
+            // Read all lines and split with "\t" out 
+           string[] DTC_file = sr.ReadToEnd().Split('\n');
+           
+            // Because the program VCDS is consistant with writing the header
+            // We know that the VCID is in position 9. So we start to read DTC codes at 10
+            for (int i=10; i<DTC_file.Length; i++)
+            {
+                // We add our dtc codes to the global list called dtc_codes
+                // But if we see a line or in this case an array position that starts with "//"
+                // We break the code and adding to the DTC list because we know that comments are coming
+                dtc_codes.Add(DTC_file[i]);
+
+                if (DTC_file[i].StartsWith("//"))
+                {
+                    // Lets return i so we know when the commments start
+                    comments_Index = i;
+                    break;
+                }
+            }
+
+            // Now we know the index that the comments start and obviously we know the end
+            // of the file/ array that is DTC file 
+            for ( int a = comments_Index; a < DTC_file.Length; a++)
+            {
+                dtc_Comments.Add(DTC_file[a]);
+            }
+           
+            
+        }
+
+
+        
+    }
+
+    
+}
