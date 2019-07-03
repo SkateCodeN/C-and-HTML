@@ -1,0 +1,55 @@
+public partial class Form1 : Form
+    {
+        public string DTC_FileLocation = @"D:\Hobbies\VCDS\DTC CODES\Silver Bullet\";
+        public string DTC_WP_Location = @"D:\Hobbies\PROGRAMMING\Programming\HTML\DTC WP\";
+
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {   
+            LoadFilesToListBox();
+            // LEts do a test of our WP class
+        }
+        /// <summary>
+        /// This method exists in the Form1 class that loads the files(fileNames into the listbox)
+        /// </summary>
+        private void LoadFilesToListBox()
+        {
+            // We load our files from the given path and load them to a string array
+            string[] fileNameArr = Directory.GetFiles(DTC_FileLocation);
+
+
+            // Since we have an array of file paths that correspond to the directory
+            // We will now get those filenames into the listbox
+            foreach (string s in fileNameArr)
+            {
+                listBox1.Items.Add(Path.GetFileName(s));
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //string test_file = @"D:\Hobbies\VCDS\DTC CODES\Silver Bullet\03-04-19 Time 15 58.txt";
+           WP test = new WP(DTC_FileLocation + listBox1.SelectedItem.ToString());
+            richTextBox1.Text = listBox1.SelectedItem.ToString();
+            //WPv2 beta = new WPv2(test_file);
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+
+
+        }
+    }
